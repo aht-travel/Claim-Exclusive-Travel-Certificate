@@ -87,6 +87,7 @@ h3{margin:0 0 8px}
 .live-status{padding:15px;border-radius:12px;margin:18px 0;font-weight:800;text-align:center}
 .live-status.live{background:#e6f8ed;border:1px solid #9bd5b1;color:#12623c}
 .live-status.off{background:#fff6e5;border:1px solid #f1d9a8;color:#75500b}
+.required-mark{color:#b42318}
 @media(max-width:620px){
  .container{margin:14px auto;padding:0 10px 25px}
  .hero{padding:29px 18px}
@@ -122,10 +123,10 @@ h3{margin:0 0 8px}
     <div class="content center">
       <h2>Here's How It Works</h2>
       <p>Join us on Zoom for a live presentation showcasing our travel booking platform and how you can explore vacation options and travel savings.</p>
-      <div class="promise"><strong>Your thank-you gift:</strong><br>Watch the approximately 45-minute presentation and stay until the end to receive your selected Exclusive Travel Certificate by email, subject to the offer's applicable terms.</div>
+      <div class="promise"><strong>Your thank-you gift:</strong><br>As a thank-you for spending your time with us and watching our approximately 45-minute presentation, we'll gift you your selected Exclusive Travel Certificate by email. Please stay until the presentation ends to receive it.</div>
       <ul class="checklist" style="text-align:left">
         <li>Choose your preferred travel certificate.</li>
-        <li>Tell us which email should receive your certificate.</li>
+        <li>Enter the name for your certificate, your mobile number, and the email address where you'd like to receive it.</li>
         <li>Watch the presentation until it concludes.</li>
       </ul>
       <button class="btn gold" onclick="go(2)">LET'S CHOOSE MY TRAVEL GIFT →</button>
@@ -206,11 +207,23 @@ h3{margin:0 0 8px}
       </div>
 
       <div class="field">
-        <label for="email">Which email address should receive your Exclusive Travel Certificate?</label>
+        <label for="certificateName">Name that should appear on the certificate <span class="required-mark" aria-hidden="true">*</span></label>
+        <input id="certificateName" type="text" placeholder="Enter the name for your certificate" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="mobileNumber">Mobile number <span class="required-mark" aria-hidden="true">*</span></label>
+        <input id="mobileNumber" type="tel" placeholder="Enter your mobile number" autocomplete="tel" inputmode="tel" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Which email address should receive your Exclusive Travel Certificate? <span class="required-mark" aria-hidden="true">*</span></label>
         <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
         <div class="muted small">Please double-check your email address for accuracy.</div>
       </div>
-      <div class="notice">Your certificate is sent after you complete the presentation, stay until the end and meet the applicable certificate requirements. Selecting a gift records your preference; it does not itself issue the certificate.</div>
+
+      <div class="notice">Your certificate is intended as a thank-you for attending the presentation. Please stay until the presentation concludes and follow the certificate instructions provided by the host. Selecting a gift records your preference; it does not itself issue the certificate.</div>
+
       <div class="btn-row">
         <button class="btn outline" onclick="go(1)">← Back</button>
         <button class="btn primary" id="submitGift" onclick="saveGift()">CONFIRM MY GIFT →</button>
@@ -230,14 +243,18 @@ h3{margin:0 0 8px}
       <div class="promise">
         <div class="small muted">YOUR SELECTED TRAVEL CERTIFICATE</div>
         <h2 id="chosenGift">Your selected gift</h2>
-        <div class="small">Certificate delivery email:</div>
+        <div class="small">Name on certificate:</div>
+        <strong id="chosenCertificateName"></strong>
+        <div class="small" style="margin-top:8px">Mobile number:</div>
+        <strong id="chosenMobile"></strong>
+        <div class="small" style="margin-top:8px">Certificate delivery email:</div>
         <strong id="chosenEmail" style="overflow-wrap:anywhere"></strong>
       </div>
       <div class="condition">
         <h2>Important: Please Read</h2>
         <p><strong>This is NOT a timeshare presentation.</strong></p>
         <p><strong>You are NOT required to purchase anything</strong> to receive your selected travel certificate.</p>
-        <p>Simply participate in the approximately 45-minute live travel savings presentation and <strong>stay until the presentation ends</strong>. Your certificate will be emailed to the address you provided, subject to the applicable offer requirements.</p>
+        <p>As a thank-you for your time, please participate in the approximately 45-minute live travel savings presentation and <strong>stay until the presentation ends</strong>. Your selected certificate will be sent to the email address you provided after the presentation, in accordance with the instructions shared during the session.</p>
       </div>
       <p>We'll showcase our booking platform and explain how it can help you explore vacation options and travel savings.</p>
       <button class="btn gold" onclick="go(4)">I UNDERSTAND — CONTINUE →</button>
@@ -265,7 +282,7 @@ h3{margin:0 0 8px}
       <div class="survey glow" style="margin-top:24px">
         <h3>📋 Quick Participant Check-In</h3>
         <p>When you join the presentation, you'll be asked to complete a short participant survey. This simply helps us get to know our audience and understand who we're presenting to.</p>
-        <p>The survey includes general questions about U.S./Canadian residency and combined household income — meaning the income of you, your spouse or partner, and contributing family members. The presentation may refer to a combined household income of ideally $50,000 per year or more.</p>
+        <p><strong>U.S./Canadian residency and combined household income</strong> are among the topics covered. Combined household income includes the income of you, your spouse or partner, and contributing family members, ideally $50,000 per year or more.</p>
         <p><strong>Your answers do not affect your ability to join or watch the presentation.</strong> Everyone is welcome to attend. Please complete the short check-in when Zoom opens so the host can check you in.</p>
         <label class="ack">
           <input type="checkbox" id="surveyAck">
@@ -343,8 +360,8 @@ h3{margin:0 0 8px}
 <script>
 /*
  * IMPORTANT:
- * Paste your deployed Google Apps Script Web App /exec URL below.
- * The Apps Script from the previous version can remain unchanged.
+ * This is the existing deployed Google Apps Script Web App /exec URL.
+ * Existing Apps Script actions are preserved.
  */
 const EMAIL_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzEbULhvoX5mwSl-EH9qw0cKj_Y8LxzBgROJm1ulyhmAEPD8oI5qWGbBp5OzGTAbjNMw/exec";
 const PRESENTATION_URL = "https://live.travelaht.com/aht";
@@ -352,6 +369,8 @@ const RESERVATION_URL = "https://aloha-hawaii-tours.github.io/spot-reservation/"
 
 let selectedGift = "";
 let selectedEmail = "";
+let certificateName = "";
+let mobileNumber = "";
 let giftSaved = false;
 let savingGift = false;
 let zoomRequestSent = false;
@@ -399,6 +418,9 @@ async function postToScript(data){
 
 async function saveGift(){
   if(savingGift)return;
+
+  const nameInput=document.getElementById("certificateName");
+  const mobileInput=document.getElementById("mobileNumber");
   const emailInput=document.getElementById("email");
   const status=document.getElementById("giftStatus");
   const btn=document.getElementById("submitGift");
@@ -407,13 +429,42 @@ async function saveGift(){
     status.textContent="Please select one travel certificate first.";
     return;
   }
-  if(!emailInput.checkValidity()||!emailInput.value.trim()){
-    emailInput.reportValidity();return;
-  }
-  if(giftSaved){go(3);return;}
 
+  if(!nameInput.value.trim()){
+    nameInput.setCustomValidity("Please enter the name that should appear on the certificate.");
+    nameInput.reportValidity();
+    nameInput.addEventListener("input",()=>nameInput.setCustomValidity(""),{once:true});
+    return;
+  }
+
+  if(!mobileInput.value.trim()){
+    mobileInput.setCustomValidity("Please enter your mobile number.");
+    mobileInput.reportValidity();
+    mobileInput.addEventListener("input",()=>mobileInput.setCustomValidity(""),{once:true});
+    return;
+  }
+
+  if(!mobileInput.checkValidity()){
+    mobileInput.reportValidity();
+    return;
+  }
+
+  if(!emailInput.value.trim()||!emailInput.checkValidity()){
+    emailInput.reportValidity();
+    return;
+  }
+
+  if(giftSaved){
+    go(3);
+    return;
+  }
+
+  certificateName=nameInput.value.trim();
+  mobileNumber=mobileInput.value.trim();
   selectedEmail=emailInput.value.trim();
-  savingGift=true;btn.disabled=true;
+
+  savingGift=true;
+  btn.disabled=true;
   btn.textContent="SUBMITTING YOUR SELECTION…";
   status.textContent="Submitting your selection…";
 
@@ -421,17 +472,25 @@ async function saveGift(){
     await postToScript({
       action:"submitGift",
       gift:selectedGift,
+      name:certificateName,
+      certificateName:certificateName,
+      mobile:mobileNumber,
+      mobileNumber:mobileNumber,
       email:selectedEmail,
       page:"AHT Exclusive Travel Certificate"
     });
+
     giftSaved=true;
     document.getElementById("chosenGift").textContent=selectedGift;
+    document.getElementById("chosenCertificateName").textContent=certificateName;
+    document.getElementById("chosenMobile").textContent=mobileNumber;
     document.getElementById("chosenEmail").textContent=selectedEmail;
     go(3);
   }catch(err){
     status.textContent="We couldn't send your selection. Please check your connection or contact us before continuing.";
   }finally{
-    savingGift=false;btn.disabled=false;
+    savingGift=false;
+    btn.disabled=false;
     btn.textContent="CONFIRM MY GIFT →";
   }
 }
@@ -499,10 +558,13 @@ function showWideScreen(){
     updateLiveWindow();
     return;
   }
+
   const box=document.getElementById("wideScreenBox");
   box.classList.remove("hidden");
+
   const input=document.getElementById("zoomEmail");
   if(!input.value)input.value=selectedEmail;
+
   box.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
@@ -515,9 +577,12 @@ async function sendZoomDetails(){
     updateLiveWindow();
     return;
   }
-  if(!input.checkValidity()||!input.value.trim()){
-    input.reportValidity();return;
+
+  if(!input.value.trim()||!input.checkValidity()){
+    input.reportValidity();
+    return;
   }
+
   if(zoomRequestSent){
     status.textContent="Your access email request has already been submitted. Please check your inbox and spam folder.";
     return;
@@ -535,6 +600,7 @@ async function sendZoomDetails(){
       source:"AHT Exclusive Travel Certificate",
       presentationUrl:PRESENTATION_URL
     });
+
     zoomRequestSent=true;
     status.textContent="Your email request has been submitted. Check your inbox and spam folder for the presentation link. Email delivery may take a little time.";
   }catch(err){
@@ -545,7 +611,7 @@ async function sendZoomDetails(){
   }
 }
 
-/* Ensure the direct mobile link is never left enabled outside the live window. */
+/* Prevent the direct mobile link from opening outside the live window. */
 document.getElementById("mobileWatch").addEventListener("click",function(e){
   if(!isLiveWindowOpen()){
     e.preventDefault();
