@@ -1,0 +1,559 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#092c4c">
+<title>Exclusive Travel Certificate | AHT</title>
+<style>
+:root{--navy:#092c4c;--blue:#1265a8;--gold:#f6bd55;--ink:#18344c;--muted:#63778b;--bg:#edf4f8;--green:#087b57}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+button,input{font:inherit}
+button{cursor:pointer}
+.topbar{background:var(--navy);color:white;text-align:center;padding:17px 14px;font-size:14px;font-weight:800;letter-spacing:1.1px}
+.topbar span{color:var(--gold)}
+.container{max-width:940px;margin:26px auto;padding:0 15px 35px}
+.panel{background:white;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px #173d5c13}
+.hero{padding:36px 25px;text-align:center;color:white;background:radial-gradient(circle at 90% 10%,#2b7fb0 0,transparent 38%),linear-gradient(135deg,#092c4c,#155d86)}
+.eyebrow{display:inline-block;border:1px solid #ffffff65;padding:6px 12px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.2px;margin-bottom:14px}
+h1{font-size:clamp(27px,5vw,43px);line-height:1.12;margin:0 auto 14px}
+h2{font-size:clamp(23px,4vw,32px);line-height:1.2;margin:0 0 14px}
+h3{margin:0 0 8px}
+.hero p{max-width:650px;margin:0 auto;color:#e9f5ff;font-size:16px}
+.content{padding:28px}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.steps{display:flex;gap:7px;padding:17px 22px;border-bottom:1px solid #e8eef3;background:#fff}
+.step{height:5px;flex:1;background:#e2eaf0;border-radius:10px}
+.step.active{background:var(--gold)}
+.page{display:none}
+.page.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.btn{border:0;border-radius:12px;padding:15px 21px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;transition:transform .2s,filter .2s;width:100%}
+.btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.primary{background:var(--blue);color:white}
+.gold{background:var(--gold);color:#342307}
+.dark{background:var(--navy);color:white}
+.outline{background:white;border:2px solid #d6e2eb;color:var(--navy)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;filter:grayscale(.4)}
+.btn-row{display:flex;gap:12px;margin-top:22px}
+.btn-row>*{flex:1}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:22px 0 0}
+.trust span{font-size:12px;background:#ffffff17;border:1px solid #ffffff35;border-radius:30px;padding:7px 10px}
+.promise{padding:17px;border:1px solid #d9e8f3;background:#f3f9fd;border-radius:14px;margin:19px 0}
+.promise strong{color:var(--navy)}
+.checklist{list-style:none;padding:0;margin:16px 0}
+.checklist li{padding:8px 0}
+.checklist li:before{content:"✓";color:var(--green);font-weight:900;margin-right:10px}
+.field{margin:18px 0;text-align:left}
+.field label{display:block;font-weight:800;margin-bottom:7px}
+.field input{width:100%;padding:14px;border:1px solid #cbd8e3;border-radius:10px;background:#fff;color:var(--ink)}
+.field input:focus{outline:2px solid #7bb7e8;border-color:var(--blue)}
+.gifts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;margin:24px 0}
+.gift{border:2px solid #e2eaf0;border-radius:15px;overflow:hidden;background:#fff;cursor:pointer;transition:border .2s,box-shadow .2s;position:relative}
+.gift:hover{border-color:#8ab8dc}
+.gift.selected{border-color:var(--blue);box-shadow:0 0 0 3px #1265a81c}
+.gift.selected:after{content:"✓ SELECTED";position:absolute;top:10px;right:9px;background:var(--blue);color:white;padding:5px 8px;border-radius:6px;font-size:10px;font-weight:900}
+.gift img{width:100%;height:210px;display:block;object-fit:cover;background:#e6edf2}
+.gift.cruise img{height:260px;object-position:center}
+.gift-body{padding:15px}
+.gift-body h3{font-size:17px;line-height:1.3}
+.gift-body p{font-size:13px;color:var(--muted);margin:7px 0 12px}
+.select-label{font-size:12px;font-weight:900;color:var(--blue);display:flex;align-items:center;gap:8px}
+.select-label input{accent-color:var(--blue);width:17px;height:17px}
+.condition{border:2px solid #b7e5ce;border-radius:15px;background:#f0fff6;padding:19px;margin:20px 0}
+.condition strong{color:#09653f}
+.glow{animation:pulse 1.65s infinite;box-shadow:0 0 0 0 #f5bd5570}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #f5bd5570,0 0 10px #f5bd5522}70%{box-shadow:0 0 0 10px #f5bd5500,0 0 25px #f5bd5560}100%{box-shadow:0 0 0 0 #f5bd5500,0 0 10px #f5bd5522}}
+.survey{border:2px solid #e3b34b;background:#fff9e9;padding:19px;border-radius:15px;margin:20px 0}
+.survey h3{color:#74500a}
+.survey p{font-size:14px}
+.ack{display:flex;align-items:flex-start;gap:10px;margin-top:15px;font-weight:800;font-size:14px}
+.ack input{margin-top:5px;accent-color:var(--blue);width:18px;height:18px;flex-shrink:0}
+.devices{display:grid;grid-template-columns:1fr 1fr;gap:17px;margin:23px 0}
+.device{padding:23px 18px;border:2px solid #dce6ed;border-radius:16px;text-align:center;background:white}
+.device .symbol{font-size:39px;display:block;margin-bottom:9px}
+.device p{font-size:13px;color:var(--muted)}
+.device.featured{border:2px solid #e7a82c;background:linear-gradient(180deg,#fffaf0,#fff)}
+.bonus{background:var(--navy);color:white;padding:11px;border-radius:9px;font-size:12px;font-weight:900;margin:12px 0}
+.notice{padding:15px;border-radius:12px;background:#fff6e5;border:1px solid #f1d9a8;font-size:14px;margin:18px 0}
+.footer{text-align:center;font-size:12px;color:#7a8b9a;padding:20px 12px}
+.hidden{display:none!important}
+#giftStatus,#zoomStatus{font-size:13px;margin-top:12px}
+.live-status{padding:15px;border-radius:12px;margin:18px 0;font-weight:800;text-align:center}
+.live-status.live{background:#e6f8ed;border:1px solid #9bd5b1;color:#12623c}
+.live-status.off{background:#fff6e5;border:1px solid #f1d9a8;color:#75500b}
+@media(max-width:620px){
+ .container{margin:14px auto;padding:0 10px 25px}
+ .hero{padding:29px 18px}
+ .content{padding:20px 15px}
+ .gifts{grid-template-columns:1fr}
+ .gift img{height:220px}
+ .gift.cruise img{height:245px}
+ .devices{grid-template-columns:1fr}
+ .btn-row{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="topbar">AHT <span>✦</span> EXCLUSIVE TRAVEL CERTIFICATE</div>
+
+<div class="container">
+<div class="panel">
+  <div class="steps" aria-label="Progress">
+    <div class="step active"></div><div class="step"></div><div class="step"></div><div class="step"></div><div class="step"></div>
+  </div>
+
+  <!-- STEP 1: WELCOME -->
+  <section class="page active" id="page1">
+    <div class="hero">
+      <div class="eyebrow">YOUR TRAVEL INVITATION IS OPEN</div>
+      <h1>Your Next Getaway for Two Could Be Closer Than You Think!</h1>
+      <p>Thank you for your interest! We're still running our Exclusive Travel Certificate offer, and you can choose the getaway that interests you most.</p>
+      <div class="trust">
+        <span>✦ 45-minute presentation</span><span>✦ No purchase required</span><span>✦ Not a timeshare</span>
+      </div>
+    </div>
+    <div class="content center">
+      <h2>Here's How It Works</h2>
+      <p>Join us on Zoom for a live presentation showcasing our travel booking platform and how you can explore vacation options and travel savings.</p>
+      <div class="promise"><strong>Your thank-you gift:</strong><br>Watch the approximately 45-minute presentation and stay until the end to receive your selected Exclusive Travel Certificate by email, subject to the offer's applicable terms.</div>
+      <ul class="checklist" style="text-align:left">
+        <li>Choose your preferred travel certificate.</li>
+        <li>Tell us which email should receive your certificate.</li>
+        <li>Watch the presentation until it concludes.</li>
+      </ul>
+      <button class="btn gold" onclick="go(2)">LET'S CHOOSE MY TRAVEL GIFT →</button>
+      <p class="muted small">No timeshare. No purchase required to receive the certificate.</p>
+    </div>
+  </section>
+
+  <!-- STEP 2: GIFT SELECTION -->
+  <section class="page" id="page2">
+    <div class="hero">
+      <div class="eyebrow">FIVE EXCITING OPTIONS</div>
+      <h1>Which Getaway Would You Pick?</h1>
+      <p>Choose ONE travel certificate that catches your eye.</p>
+    </div>
+    <div class="content">
+      <div class="gifts">
+
+        <article class="gift cruise" data-gift="5D/4N Luxury Cruise for Two" tabindex="0" role="radio" aria-checked="false">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Carnival-Freedom-Cruise-Ship.jpg?width=1400"
+            alt="Carnival Freedom cruise ship sailing at sea"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1200&q=85';"
+          >
+          <div class="gift-body">
+            <h3>🚢 5D/4N Luxury Cruise for Two</h3>
+            <p>Sail away on a memorable getaway for two. Cruise certificate options include Carnival, Royal Caribbean, Norwegian or Princess, with Caribbean or Central America destinations, including options such as the Bahamas, Cozumel and Ensenada.</p>
+            <div class="select-label"><input type="radio" name="gift" value="5D/4N Luxury Cruise for Two"> CHOOSE THIS GIFT</div>
+          </div>
+        </article>
+
+        <article class="gift" data-gift="4D/3N U.S. Hotel Stay for Two" tabindex="0" role="radio" aria-checked="false">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=85" alt="Hotel swimming pool and resort" loading="lazy">
+          <div class="gift-body">
+            <h3>🏨 4D/3N U.S. Hotel Stay for Two</h3>
+            <p>Explore 35+ U.S. destinations and enjoy a hotel getaway. Hotel options include Marriott, Hyatt, Hilton, IHG and Wyndham.</p>
+            <div class="select-label"><input type="radio" name="gift" value="4D/3N U.S. Hotel Stay for Two"> CHOOSE THIS GIFT</div>
+          </div>
+        </article>
+
+        <article class="gift" data-gift="6D/5N Hawaii Hotel Stay for Two" tabindex="0" role="radio" aria-checked="false">
+          <img src="https://images.unsplash.com/photo-1507876466758-bc54f384809c?auto=format&fit=crop&w=1000&q=85" alt="Tropical Hawaiian coastline" loading="lazy">
+          <div class="gift-body">
+            <h3>🌺 6D/5N Hawaii Hotel Stay for Two</h3>
+            <p>Enjoy island life in Oahu and Waikiki. Hotel options include Marriott, Hyatt, Hilton, IHG and Wyndham.</p>
+            <div class="select-label"><input type="radio" name="gift" value="6D/5N Hawaii Hotel Stay for Two"> CHOOSE THIS GIFT</div>
+          </div>
+        </article>
+
+        <article class="gift" data-gift="Mexico Hotel Stay for Two" tabindex="0" role="radio" aria-checked="false">
+          <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1000&q=85" alt="Sunny tropical beach in Mexico" loading="lazy">
+          <div class="gift-body">
+            <h3>🏝️ Mexico Hotel Getaway for Two</h3>
+            <p>Choose either:</p>
+            <ul class="small">
+              <li><strong>6D/5N</strong> in Cancun, Riviera Maya or Puerto Vallarta</li>
+              <li><strong>OR 5D/4N</strong> in Cabo San Lucas</li>
+            </ul>
+            <p>Hotel options include Accor, Hyatt, Hilton, Marriott and Wyndham.</p>
+            <div class="select-label"><input type="radio" name="gift" value="Mexico Hotel Stay for Two"> CHOOSE THIS GIFT</div>
+          </div>
+        </article>
+
+        <article class="gift" data-gift="6D/5N Puerto Plata Resort Stay" tabindex="0" role="radio" aria-checked="false">
+          <img
+            src="https://www.lifestyletropicalbeach.com/images/slides/slide-16.jpg"
+            alt="Lifestyle Tropical Beach Resort and Spa in Puerto Plata"
+            loading="lazy"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=85';"
+          >
+          <div class="gift-body">
+            <h3>🌴 6D/5N Puerto Plata Resort Getaway</h3>
+            <p>Stay at <strong>Lifestyle Tropical Beach Resort &amp; Spa</strong> in the Dominican Republic. The all-inclusive resort certificate is for two adults and up to two children aged 12 or younger.</p>
+            <div class="select-label"><input type="radio" name="gift" value="6D/5N Puerto Plata Resort Stay"> CHOOSE THIS GIFT</div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="field">
+        <label for="email">Which email address should receive your Exclusive Travel Certificate?</label>
+        <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <div class="muted small">Please double-check your email address for accuracy.</div>
+      </div>
+      <div class="notice">Your certificate is sent after you complete the presentation, stay until the end and meet the applicable certificate requirements. Selecting a gift records your preference; it does not itself issue the certificate.</div>
+      <div class="btn-row">
+        <button class="btn outline" onclick="go(1)">← Back</button>
+        <button class="btn primary" id="submitGift" onclick="saveGift()">CONFIRM MY GIFT →</button>
+      </div>
+      <div id="giftStatus" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- STEP 3: CONDITIONS -->
+  <section class="page" id="page3">
+    <div class="hero">
+      <div class="eyebrow">YOUR GIFT, YOUR CHOICE</div>
+      <h1>You're Almost Ready!</h1>
+      <p>Your preferred certificate has been selected.</p>
+    </div>
+    <div class="content center">
+      <div class="promise">
+        <div class="small muted">YOUR SELECTED TRAVEL CERTIFICATE</div>
+        <h2 id="chosenGift">Your selected gift</h2>
+        <div class="small">Certificate delivery email:</div>
+        <strong id="chosenEmail" style="overflow-wrap:anywhere"></strong>
+      </div>
+      <div class="condition">
+        <h2>Important: Please Read</h2>
+        <p><strong>This is NOT a timeshare presentation.</strong></p>
+        <p><strong>You are NOT required to purchase anything</strong> to receive your selected travel certificate.</p>
+        <p>Simply participate in the approximately 45-minute live travel savings presentation and <strong>stay until the presentation ends</strong>. Your certificate will be emailed to the address you provided, subject to the applicable offer requirements.</p>
+      </div>
+      <p>We'll showcase our booking platform and explain how it can help you explore vacation options and travel savings.</p>
+      <button class="btn gold" onclick="go(4)">I UNDERSTAND — CONTINUE →</button>
+      <p class="muted small">Please arrange to watch from a quiet, stationary location.</p>
+    </div>
+  </section>
+
+  <!-- STEP 4: SAFETY AND CHECK-IN SURVEY -->
+  <section class="page" id="page4">
+    <div class="hero">
+      <div class="eyebrow">BEFORE YOU JOIN</div>
+      <h1>Let's Get You Ready to Watch</h1>
+      <p>A quick safety reminder and participant check-in before you choose your device.</p>
+    </div>
+    <div class="content">
+      <div class="notice">
+        <h3>🚦 Your Safety Comes First</h3>
+        You must be in a quiet, stationary location to participate. We cannot accept participants who are driving or inside a moving vehicle. Please stop in a safe place and settle in before joining.
+      </div>
+      <label class="ack">
+        <input type="checkbox" id="safetyAck">
+        <span>I understand. I am in a safe, stationary location and will not join while driving or in a moving vehicle.</span>
+      </label>
+
+      <div class="survey glow" style="margin-top:24px">
+        <h3>📋 Quick Participant Check-In</h3>
+        <p>When you join the presentation, you'll be asked to complete a short participant survey. This simply helps us get to know our audience and understand who we're presenting to.</p>
+        <p>The survey includes general questions about U.S./Canadian residency and combined household income — meaning the income of you, your spouse or partner, and contributing family members. The presentation may refer to a combined household income of ideally $50,000 per year or more.</p>
+        <p><strong>Your answers do not affect your ability to join or watch the presentation.</strong> Everyone is welcome to attend. Please complete the short check-in when Zoom opens so the host can check you in.</p>
+        <label class="ack">
+          <input type="checkbox" id="surveyAck">
+          <span>I understand the quick check-in survey and am ready to continue.</span>
+        </label>
+      </div>
+      <button class="btn gold" onclick="confirmReady()">I UNDERSTAND — CONTINUE →</button>
+      <p class="muted small center">Please join 5–10 minutes early when possible.</p>
+    </div>
+  </section>
+
+  <!-- STEP 5: LIVE WINDOW / RESERVATION -->
+  <section class="page" id="page5">
+    <div class="hero">
+      <div class="eyebrow">YOUR PRESENTATION IS NEXT</div>
+      <h1>Choose How You'd Like to Watch</h1>
+      <p>For the best viewing experience, we recommend a laptop, desktop or tablet. Live access is available only during the scheduled viewing window.</p>
+    </div>
+    <div class="content">
+      <div id="liveStatus" class="live-status" role="status" aria-live="polite"></div>
+
+      <!-- Shown only between 1:45 PM and 8:44 PM Eastern Time -->
+      <div id="liveOptions" class="hidden">
+        <div class="devices">
+          <div class="device">
+            <span class="symbol">📱</span>
+            <h3>Watch on Mobile</h3>
+            <p>Join using your phone when you're safely settled in a stationary location.</p>
+            <a id="mobileWatch" class="btn primary" href="https://live.travelaht.com/aht" target="_blank" rel="noopener">START WATCHING ON MOBILE →</a>
+          </div>
+
+          <div class="device featured glow">
+            <span class="symbol">💻</span>
+            <h3>Recommended: Wide-Screen</h3>
+            <p>Use a laptop, desktop or tablet for a more comfortable viewing experience.</p>
+            <div class="bonus">🎁 EXTRA $100 REWARDS VOUCHER*</div>
+            <p><strong>Wide-screen participation may qualify you for an additional $100 Rewards Voucher on top of your Travel Certificate.</strong></p>
+            <button class="btn gold" onclick="showWideScreen()">EMAIL ME THE WIDE-SCREEN ACCESS →</button>
+          </div>
+        </div>
+
+        <div id="wideScreenBox" class="promise hidden">
+          <h3>Send Presentation Access to Your Email</h3>
+          <p>We'll email the presentation link to you. Open that email on your laptop, desktop or tablet to start watching.</p>
+          <div class="field">
+            <label for="zoomEmail">Email address for presentation access</label>
+            <input type="email" id="zoomEmail" autocomplete="email" placeholder="you@example.com">
+          </div>
+          <button class="btn dark" id="sendZoom" onclick="sendZoomDetails()">EMAIL MY PRESENTATION DETAILS →</button>
+          <div id="zoomStatus" role="status" aria-live="polite"></div>
+        </div>
+        <div class="notice"><strong>Before joining:</strong> Use the Zoom Workplace app if possible, check your audio and join a few minutes early. If you disconnect, use your access email to try joining again.</div>
+        <p class="muted small center">*The additional $100 Rewards Voucher is subject to the applicable wide-screen participation requirements and offer terms. It is separate from the selected Travel Certificate.</p>
+      </div>
+
+      <!-- Shown only outside the live window -->
+      <div id="reserveOptions" class="hidden center">
+        <h2>We're Not Live Right Now</h2>
+        <p id="reserveMessage">The live viewing window is currently closed. You can reserve a spot for an upcoming presentation instead.</p>
+        <div class="promise">
+          <strong>Reserve your spot for the next presentation.</strong>
+          <p>Choose a suitable upcoming session and return during the live viewing window to watch.</p>
+        </div>
+        <a class="btn gold glow" href="https://aloha-hawaii-tours.github.io/spot-reservation/">RESERVE MY SPOT →</a>
+        <p class="muted small">The Reserve Spot option is available while live watching is closed.</p>
+      </div>
+
+      <button class="btn outline" onclick="go(4)">← BACK</button>
+    </div>
+  </section>
+</div>
+<div class="footer">AHT &amp; Travel · Exclusive Travel Certificate for Joining<br>All travel certificates are subject to applicable terms and redemption requirements.</div>
+</div>
+
+<script>
+/*
+ * IMPORTANT:
+ * Paste your deployed Google Apps Script Web App /exec URL below.
+ * The Apps Script from the previous version can remain unchanged.
+ */
+const EMAIL_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzEbULhvoX5mwSl-EH9qw0cKj_Y8LxzBgROJm1ulyhmAEPD8oI5qWGbBp5OzGTAbjNMw/exec";
+const PRESENTATION_URL = "https://live.travelaht.com/aht";
+const RESERVATION_URL = "https://aloha-hawaii-tours.github.io/spot-reservation/";
+
+let selectedGift = "";
+let selectedEmail = "";
+let giftSaved = false;
+let savingGift = false;
+let zoomRequestSent = false;
+
+function go(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("page"+n).classList.add("active");
+  document.querySelectorAll(".step").forEach((s,i)=>s.classList.toggle("active",i<n));
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(n===5) updateLiveWindow();
+}
+
+document.querySelectorAll(".gift").forEach(card=>{
+  function selectCard(){
+    selectedGift=card.dataset.gift;
+    document.querySelectorAll(".gift").forEach(c=>{
+      c.classList.remove("selected");
+      c.setAttribute("aria-checked","false");
+      c.querySelector('input[type="radio"]').checked=false;
+    });
+    card.classList.add("selected");
+    card.setAttribute("aria-checked","true");
+    card.querySelector('input[type="radio"]').checked=true;
+  }
+  card.addEventListener("click",selectCard);
+  card.addEventListener("keydown",e=>{
+    if(e.key==="Enter"||e.key===" "){
+      e.preventDefault();selectCard();
+    }
+  });
+});
+
+async function postToScript(data){
+  if(!EMAIL_SCRIPT_URL ||
+     EMAIL_SCRIPT_URL.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT")){
+    throw new Error("The Apps Script URL has not been added to the HTML yet.");
+  }
+  await fetch(EMAIL_SCRIPT_URL,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+    body:new URLSearchParams(data).toString()
+  });
+}
+
+async function saveGift(){
+  if(savingGift)return;
+  const emailInput=document.getElementById("email");
+  const status=document.getElementById("giftStatus");
+  const btn=document.getElementById("submitGift");
+
+  if(!selectedGift){
+    status.textContent="Please select one travel certificate first.";
+    return;
+  }
+  if(!emailInput.checkValidity()||!emailInput.value.trim()){
+    emailInput.reportValidity();return;
+  }
+  if(giftSaved){go(3);return;}
+
+  selectedEmail=emailInput.value.trim();
+  savingGift=true;btn.disabled=true;
+  btn.textContent="SUBMITTING YOUR SELECTION…";
+  status.textContent="Submitting your selection…";
+
+  try{
+    await postToScript({
+      action:"submitGift",
+      gift:selectedGift,
+      email:selectedEmail,
+      page:"AHT Exclusive Travel Certificate"
+    });
+    giftSaved=true;
+    document.getElementById("chosenGift").textContent=selectedGift;
+    document.getElementById("chosenEmail").textContent=selectedEmail;
+    go(3);
+  }catch(err){
+    status.textContent="We couldn't send your selection. Please check your connection or contact us before continuing.";
+  }finally{
+    savingGift=false;btn.disabled=false;
+    btn.textContent="CONFIRM MY GIFT →";
+  }
+}
+
+function confirmReady(){
+  if(!document.getElementById("safetyAck").checked){
+    alert("Please confirm that you are in a quiet, stationary location and will not join while driving or in a moving vehicle.");
+    return;
+  }
+  if(!document.getElementById("surveyAck").checked){
+    alert("Please acknowledge the participant check-in survey before continuing.");
+    return;
+  }
+  go(5);
+}
+
+/*
+ * Uses America/New_York, so the window follows Eastern daylight-saving time.
+ * Active from 1:45 PM (13:45) through 8:44 PM (20:44), inclusive.
+ */
+function isLiveWindowOpen(){
+  const parts = new Intl.DateTimeFormat("en-US",{
+    timeZone:"America/New_York",
+    hour:"2-digit",
+    minute:"2-digit",
+    hourCycle:"h23"
+  }).formatToParts(new Date());
+
+  const hour = Number(parts.find(p=>p.type==="hour").value);
+  const minute = Number(parts.find(p=>p.type==="minute").value);
+  const nowMinutes = hour*60+minute;
+
+  return nowMinutes >= (13*60+45) && nowMinutes <= (20*60+44);
+}
+
+function updateLiveWindow(){
+  const live = isLiveWindowOpen();
+  const liveOptions = document.getElementById("liveOptions");
+  const reserveOptions = document.getElementById("reserveOptions");
+  const status = document.getElementById("liveStatus");
+
+  liveOptions.classList.toggle("hidden",!live);
+  reserveOptions.classList.toggle("hidden",live);
+
+  if(live){
+    status.className="live-status live";
+    status.textContent="● LIVE ACCESS IS AVAILABLE — You can start watching now.";
+  }else{
+    status.className="live-status off";
+    status.textContent="LIVE ACCESS IS CURRENTLY CLOSED";
+    document.getElementById("wideScreenBox").classList.add("hidden");
+    document.getElementById("reserveMessage").textContent=
+      "The viewing window is open daily from 1:45 PM through 8:44 PM Eastern Time. It's currently outside that window, so please reserve a spot for an upcoming presentation.";
+  }
+}
+
+/* Keep the page's active/inactive state accurate while it is open. */
+setInterval(updateLiveWindow,15000);
+document.addEventListener("visibilitychange",()=>{
+  if(!document.hidden)updateLiveWindow();
+});
+
+function showWideScreen(){
+  if(!isLiveWindowOpen()){
+    updateLiveWindow();
+    return;
+  }
+  const box=document.getElementById("wideScreenBox");
+  box.classList.remove("hidden");
+  const input=document.getElementById("zoomEmail");
+  if(!input.value)input.value=selectedEmail;
+  box.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+async function sendZoomDetails(){
+  const input=document.getElementById("zoomEmail");
+  const status=document.getElementById("zoomStatus");
+  const btn=document.getElementById("sendZoom");
+
+  if(!isLiveWindowOpen()){
+    updateLiveWindow();
+    return;
+  }
+  if(!input.checkValidity()||!input.value.trim()){
+    input.reportValidity();return;
+  }
+  if(zoomRequestSent){
+    status.textContent="Your access email request has already been submitted. Please check your inbox and spam folder.";
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent="SENDING REQUEST…";
+  status.textContent="Submitting your request for presentation details…";
+
+  try{
+    await postToScript({
+      action:"sendZoomDetails",
+      email:input.value.trim(),
+      gift:selectedGift,
+      source:"AHT Exclusive Travel Certificate",
+      presentationUrl:PRESENTATION_URL
+    });
+    zoomRequestSent=true;
+    status.textContent="Your email request has been submitted. Check your inbox and spam folder for the presentation link. Email delivery may take a little time.";
+  }catch(err){
+    status.textContent="We couldn't submit the email request. Please try again while live access is available.";
+  }finally{
+    btn.disabled=false;
+    btn.textContent="EMAIL MY PRESENTATION DETAILS →";
+  }
+}
+
+/* Ensure the direct mobile link is never left enabled outside the live window. */
+document.getElementById("mobileWatch").addEventListener("click",function(e){
+  if(!isLiveWindowOpen()){
+    e.preventDefault();
+    updateLiveWindow();
+  }
+});
+
+updateLiveWindow();
+</script>
+</body>
+</html>
