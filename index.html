@@ -71,6 +71,9 @@ h3{margin:0 0 8px}
 @keyframes pulse{0%{box-shadow:0 0 0 0 #f5bd5570,0 0 10px #f5bd5522}70%{box-shadow:0 0 0 10px #f5bd5500,0 0 25px #f5bd5560}100%{box-shadow:0 0 0 0 #f5bd5500,0 0 10px #f5bd5522}}
 .survey{border:2px solid #e3b34b;background:#fff9e9;padding:19px;border-radius:15px;margin:20px 0}
 .survey h3{color:#74500a}
+.safety-emphasis{border:2px solid #e3b34b!important;background:#fff9e9!important;color:var(--ink)}
+.safety-emphasis h3{color:#74500a}
+.fee-emphasis{padding:12px 14px;border-radius:10px;background:#fff9e9;border:1px solid #e3b34b;color:#74500a;animation:pulse 1.65s infinite}
 .survey p{font-size:14px}
 .ack{display:flex;align-items:flex-start;gap:10px;margin-top:15px;font-weight:800;font-size:14px}
 .ack input{margin-top:5px;accent-color:var(--blue);width:18px;height:18px;flex-shrink:0}
@@ -107,7 +110,7 @@ h3{margin:0 0 8px}
 <div class="container">
 <div class="panel">
   <div class="steps" aria-label="Progress">
-    <div class="step active"></div><div class="step"></div><div class="step"></div><div class="step"></div><div class="step"></div>
+    <div class="step active"></div><div class="step"></div><div class="step"></div><div class="step"></div>
   </div>
 
   <!-- STEP 1: WELCOME -->
@@ -130,7 +133,7 @@ h3{margin:0 0 8px}
         <li>Watch the presentation until it concludes.</li>
       </ul>
       <button class="btn gold" onclick="go(2)">LET'S CHOOSE MY TRAVEL GIFT →</button>
-      <p class="muted small">No timeshare. No purchase required to receive the certificate.</p>
+      <p class="muted small">No fee to attend. Stay until the end to receive your Travel Certificate.</p>
     </div>
   </section>
 
@@ -232,12 +235,12 @@ h3{margin:0 0 8px}
     </div>
   </section>
 
-  <!-- STEP 3: CONDITIONS -->
+  <!-- STEP 3: FINAL CHECK-IN BEFORE WATCHING -->
   <section class="page" id="page3">
     <div class="hero">
       <div class="eyebrow">YOUR GIFT, YOUR CHOICE</div>
       <h1>You're Almost Ready!</h1>
-      <p>Your preferred certificate has been selected.</p>
+      <p>Your preferred certificate has been selected. Please review these quick reminders before continuing.</p>
     </div>
     <div class="content center">
       <div class="promise">
@@ -250,52 +253,35 @@ h3{margin:0 0 8px}
         <div class="small" style="margin-top:8px">Certificate delivery email:</div>
         <strong id="chosenEmail" style="overflow-wrap:anywhere"></strong>
       </div>
+
       <div class="condition">
         <h2>Important: Please Read</h2>
         <p><strong>This is NOT a timeshare presentation.</strong></p>
-        <p><strong>You are NOT required to purchase anything</strong> to receive your selected travel certificate.</p>
+        <p class="fee-emphasis"><strong>No fee to attend. Stay until the end to receive your Travel Certificate.</strong></p>
         <p>As a thank-you for your time, please participate in the approximately 45-minute live travel savings presentation and <strong>stay until the presentation ends</strong>. Your selected certificate will be sent to the email address you provided after the presentation, in accordance with the instructions shared during the session.</p>
       </div>
       <p>We'll showcase our booking platform and explain how it can help you explore vacation options and travel savings.</p>
-      <button class="btn gold" onclick="go(4)">I UNDERSTAND — CONTINUE →</button>
-      <p class="muted small">Please arrange to watch from a quiet, stationary location.</p>
-    </div>
-  </section>
 
-  <!-- STEP 4: SAFETY AND CHECK-IN SURVEY -->
-  <section class="page" id="page4">
-    <div class="hero">
-      <div class="eyebrow">BEFORE YOU JOIN</div>
-      <h1>Let's Get You Ready to Watch</h1>
-      <p>A quick safety reminder and participant check-in before you choose your device.</p>
-    </div>
-    <div class="content">
-      <div class="notice">
+      <div class="notice glow safety-emphasis">
         <h3>🚦 Your Safety Comes First</h3>
-        You must be in a quiet, stationary location to participate. We cannot accept participants who are driving or inside a moving vehicle. Please stop in a safe place and settle in before joining.
+        <p>You must be in a quiet, stationary location to participate. We cannot accept participants who are driving or inside a moving vehicle. Please stop in a safe place and settle in before joining.</p>
+        <p><strong>Please do not join while driving or while inside a moving vehicle.</strong></p>
       </div>
-      <label class="ack">
-        <input type="checkbox" id="safetyAck">
-        <span>I understand. I am in a safe, stationary location and will not join while driving or in a moving vehicle.</span>
-      </label>
 
-      <div class="survey glow" style="margin-top:24px">
+      <div class="survey glow">
         <h3>📋 Quick Participant Check-In</h3>
-        <p>When you join the presentation, you'll be asked to complete a short participant survey. This simply helps us get to know our audience and understand who we're presenting to.</p>
+        <p>When you join the presentation, you'll be asked to complete a short participant survey. This helps us get to know our audience and understand who we're presenting to.</p>
         <p><strong>U.S./Canadian residency and combined household income</strong> are among the topics covered. Combined household income includes the income of you, your spouse or partner, and contributing family members, ideally $50,000 per year or more.</p>
         <p><strong>Your answers do not affect your ability to join or watch the presentation.</strong> Everyone is welcome to attend. Please complete the short check-in when Zoom opens so the host can check you in.</p>
-        <label class="ack">
-          <input type="checkbox" id="surveyAck">
-          <span>I understand the quick check-in survey and am ready to continue.</span>
-        </label>
       </div>
-      <button class="btn gold" onclick="confirmReady()">I UNDERSTAND — CONTINUE →</button>
-      <p class="muted small center">Please join 5–10 minutes early when possible.</p>
+
+      <button class="btn gold" onclick="go(4)">I UNDERSTAND — SHOW MY WATCHING OPTIONS →</button>
+      <p class="muted small center">Please join 5–10 minutes early when possible and watch from a quiet, stationary location.</p>
     </div>
   </section>
 
-  <!-- STEP 5: LIVE WINDOW / RESERVATION -->
-  <section class="page" id="page5">
+  <!-- STEP 4: LIVE WINDOW / RESERVATION -->
+  <section class="page" id="page4">
     <div class="hero">
       <div class="eyebrow">YOUR PRESENTATION IS NEXT</div>
       <h1>Choose How You'd Like to Watch</h1>
@@ -350,7 +336,7 @@ h3{margin:0 0 8px}
         <p class="muted small">The Reserve Spot option is available while live watching is closed.</p>
       </div>
 
-      <button class="btn outline" onclick="go(4)">← BACK</button>
+      <button class="btn outline" onclick="go(3)">← BACK</button>
     </div>
   </section>
 </div>
@@ -380,7 +366,7 @@ function go(n){
   document.getElementById("page"+n).classList.add("active");
   document.querySelectorAll(".step").forEach((s,i)=>s.classList.toggle("active",i<n));
   window.scrollTo({top:0,behavior:"smooth"});
-  if(n===5) updateLiveWindow();
+  if(n===4) updateLiveWindow();
 }
 
 document.querySelectorAll(".gift").forEach(card=>{
@@ -495,17 +481,6 @@ async function saveGift(){
   }
 }
 
-function confirmReady(){
-  if(!document.getElementById("safetyAck").checked){
-    alert("Please confirm that you are in a quiet, stationary location and will not join while driving or in a moving vehicle.");
-    return;
-  }
-  if(!document.getElementById("surveyAck").checked){
-    alert("Please acknowledge the participant check-in survey before continuing.");
-    return;
-  }
-  go(5);
-}
 
 /*
  * Uses America/New_York, so the window follows Eastern daylight-saving time.
