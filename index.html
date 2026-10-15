@@ -155,7 +155,6 @@ h3{margin:0 0 8px}
       <div class="gift-pulse"><strong>🎁 Your thank-you gift</strong><br>As a thank-you for spending your time with us and watching our approximately 45-minute presentation, we'll gift you your selected Exclusive Travel Certificate by email. Please stay until the presentation ends to receive it.</div>
       <ul class="checklist" style="text-align:left">
         <li>Choose the travel certificate you'd most enjoy.</li>
-        <li>Enter just the email address where you'd like us to send it.</li>
         <li>Watch the presentation until it concludes.</li>
       </ul>
       <button class="btn gold" onclick="go(2)">LET'S CHOOSE MY TRAVEL GIFT →</button>
@@ -235,13 +234,7 @@ h3{margin:0 0 8px}
 
       </div>
 
-      <div class="field">
-        <label for="email">Which email address should receive your Exclusive Travel Certificate? <span class="required-mark" aria-hidden="true">*</span></label>
-        <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
-        <div class="muted small">Please double-check your email address for accuracy.</div>
-      </div>
-
-      <div class="notice"><strong>That’s all you need to do here.</strong> Choose your preferred certificate and enter the email address where you’d like to receive it. We’ll explain the next steps during the presentation; the certificate is sent by email after you stay through the end and follow the host’s instructions.</div>
+      <div class="notice"><strong>That’s all you need to do here.</strong> Choose your preferred certificate and confirm your selection. We’ll explain the next steps during the presentation; the certificate is sent by email after you stay through the end and follow the host’s instructions.</div>
 
       <div class="btn-row">
         <button class="btn outline" onclick="go(1)">← Back</button>
@@ -262,15 +255,13 @@ h3{margin:0 0 8px}
       <div class="promise">
         <div class="small muted">YOUR SELECTED TRAVEL CERTIFICATE</div>
         <h2 id="chosenGift">Your selected gift</h2>
-        <div class="small" style="margin-top:8px">We'll send your certificate to:</div>
-        <strong id="chosenEmail" style="overflow-wrap:anywhere"></strong>
       </div>
 
       <div class="condition">
         <h2>Important: Please Read</h2>
         <p><strong>This is NOT a timeshare presentation.</strong></p>
         <p class="fee-emphasis"><strong>No fee to attend. Stay until the end to receive your Travel Certificate.</strong></p>
-        <p>As a thank-you for watching our approximately 45-minute introduction to the travel booking platform, your selected certificate will be sent to the email address you provided after the presentation. Please <strong>stay until it ends</strong> and follow the host’s certificate instructions.</p>
+        <p>As a thank-you for watching our approximately 45-minute introduction to the travel booking platform, your selected certificate will be sent after the presentation. Please <strong>stay until it ends</strong> and follow the host’s certificate instructions.</p>
       </div>
       <p>We'll showcase our booking platform and explain how it can help you explore vacation options and travel savings.</p>
 
@@ -372,7 +363,6 @@ const PRESENTATION_URL = "https://live.travelaht.com/aht";
 const RESERVATION_URL = "https://aloha-hawaii-tours.github.io/spot-reservation/";
 
 let selectedGift = "";
-let selectedEmail = "";
 let giftSaved = false;
 let savingGift = false;
 let zoomRequestSent = false;
@@ -421,7 +411,6 @@ async function postToScript(data){
 async function saveGift(){
   if(savingGift)return;
 
-  const emailInput=document.getElementById("email");
   const status=document.getElementById("giftStatus");
   const btn=document.getElementById("submitGift");
 
@@ -430,17 +419,10 @@ async function saveGift(){
     return;
   }
 
-  if(!emailInput.value.trim()||!emailInput.checkValidity()){
-    emailInput.reportValidity();
-    return;
-  }
-
   if(giftSaved){
     go(3);
     return;
   }
-
-  selectedEmail=emailInput.value.trim();
 
   savingGift=true;
   btn.disabled=true;
@@ -455,13 +437,12 @@ async function saveGift(){
       certificateName:"",
       mobile:"",
       mobileNumber:"",
-      email:selectedEmail,
+      email:"",
       page:"AHT Exclusive Travel Certificate"
     });
 
     giftSaved=true;
     document.getElementById("chosenGift").textContent=selectedGift;
-    document.getElementById("chosenEmail").textContent=selectedEmail;
     go(3);
   }catch(err){
     status.textContent="We couldn't send your selection. Please check your connection or contact us before continuing.";
@@ -527,9 +508,6 @@ function showWideScreen(){
 
   const box=document.getElementById("wideScreenBox");
   box.classList.remove("hidden");
-
-  const input=document.getElementById("zoomEmail");
-  if(!input.value)input.value=selectedEmail;
 
   box.scrollIntoView({behavior:"smooth",block:"center"});
 }
