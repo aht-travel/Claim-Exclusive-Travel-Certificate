@@ -88,7 +88,7 @@ h3{margin:0 0 7px}
 .notice{padding:13px;border-radius:11px;background:#fff6e5;border:1px solid #f1d9a8;font-size:13px;margin:16px 0}
 .footer{text-align:center;font-size:11px;color:#7a8b9a;padding:18px 12px}
 .hidden{display:none!important}
-#giftStatus,#zoomStatus{font-size:13px;margin-top:11px}
+#zoomStatus{font-size:13px;margin-top:11px}
 .live-status{padding:13px;border-radius:11px;margin:16px 0;font-weight:800;text-align:center;font-size:13px}
 .live-status.live{background:#e6f8ed;border:1px solid #9bd5b1;color:#12623c}
 .live-status.off{background:#fff6e5;border:1px solid #f1d9a8;color:#75500b}
@@ -168,8 +168,8 @@ h3{margin:0 0 7px}
 
     <div class="content">
       <div class="center">
-        <h2>Here's How It Works</h2>
-        <p class="muted">Browse the five travel gifts below. Select your preferred gift and enter the email address where you'd like it sent. Then continue to the participant check-in and watching options.</p>
+        <h2>Vacation Certificates for Two</h2>
+        <p class="muted">Below are the vacation certificates for two we are giving away. We’re promoting our travel booking platform and looking for people to see it in action. We value your time, so the certificate is our thank-you for joining the 45-minute demo.</p>
       </div>
 
       <!-- Compact gift tiles: images and descriptions -->
@@ -244,41 +244,8 @@ h3{margin:0 0 7px}
         Your selected Travel Certificate is provided by email after you attend the approximately 45-minute presentation, stay until it ends, and follow the host's instructions.
       </div>
 
-      <!-- Gift selection and email are combined into one step -->
-      <div class="form-card">
-        <h2>Confirm Your Gift</h2>
-        <p class="muted small">Choose one gift and tell us where to send it. Once submitted, you'll proceed to the quick participant check-in.</p>
-
-        <form id="giftForm">
-          <div class="field">
-            <label for="giftSelect">Which travel gift would you prefer? <span style="color:#b42318">*</span></label>
-            <select id="giftSelect" name="gift" required>
-              <option value="">Select your preferred gift</option>
-              <option value="5D/4N Luxury Cruise for Two">5D/4N Cruise for Two</option>
-              <option value="4D/3N U.S. Hotel Stay for Two">4D/3N U.S. Hotel Stay for Two</option>
-              <option value="6D/5N Hawaii Hotel Stay for Two">6D/5N Hawaii Hotel Stay for Two</option>
-              <option value="Mexico Hotel Stay for Two">Mexico Hotel Getaway — 6D/5N or 5D/4N</option>
-              <option value="6D/5N Puerto Plata Resort Stay">6D/5N Puerto Plata Resort Getaway</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="giftEmail">Email address for your Travel Certificate <span style="color:#b42318">*</span></label>
-            <input
-              type="email"
-              id="giftEmail"
-              name="email"
-              autocomplete="email"
-              placeholder="you@example.com"
-              required
-            >
-          </div>
-
-          <button class="btn primary" id="submitGift" type="submit">CONFIRM GIFT &amp; CONTINUE →</button>
-
-          <p class="form-note">Please use an email address you can access. Your certificate is subject to the applicable offer terms and completion requirements.</p>
-          <div id="giftStatus" role="status" aria-live="polite"></div>
-        </form>
+      <div class="center" style="margin-top:20px">
+        <button class="btn primary" type="button" onclick="go(2)">CONTINUE TO PARTICIPANT CHECK-IN →</button>
       </div>
     </div>
   </section>
@@ -286,18 +253,12 @@ h3{margin:0 0 7px}
   <!-- STEP 2: QUICK PARTICIPANT CHECK-IN -->
   <section class="page" id="page2">
     <div class="hero">
-      <div class="eyebrow">YOUR GIFT, YOUR CHOICE</div>
+      <div class="eyebrow">YOUR TRAVEL INVITATION</div>
       <h1>You're Almost Ready!</h1>
-      <p>Your gift preference has been submitted. Please review these quick reminders before continuing.</p>
+      <p>Please review these quick reminders before continuing to the watching options.</p>
     </div>
 
     <div class="content center">
-      <div class="promise">
-        <div class="small muted">YOUR SELECTED TRAVEL CERTIFICATE</div>
-        <h2 id="chosenGift">Your selected gift</h2>
-        <div class="small muted">Confirmation email: <span id="confirmedEmail"></span></div>
-      </div>
-
       <div class="condition">
         <h2>Important: Please Read</h2>
         <p><strong>This is NOT a timeshare presentation.</strong></p>
@@ -326,7 +287,7 @@ h3{margin:0 0 7px}
       <p class="muted small">Please join 5–10 minutes early when possible and watch from a quiet, stationary location.</p>
 
       <div class="btn-row">
-        <button class="btn outline" onclick="go(1)">← BACK TO GIFTS</button>
+        <button class="btn outline" onclick="go(1)">← BACK TO CERTIFICATES</button>
       </div>
     </div>
   </section>
@@ -336,7 +297,7 @@ h3{margin:0 0 7px}
     <div class="hero">
       <div class="eyebrow">YOUR PRESENTATION IS NEXT</div>
       <h1>Choose How You'd Like to Watch</h1>
-      <p>For the best viewing experience, we recommend a laptop, desktop or tablet. Live access is available only during the scheduled viewing window.</p>
+      <p>For the best viewing experience, we recommend a laptop, desktop or tablet. Live access is available only during the scheduled viewing window, and you can reserve a spot for a future session at any time.</p>
     </div>
 
     <div class="content">
@@ -370,7 +331,7 @@ h3{margin:0 0 7px}
 
           <div class="promise" style="margin-top:15px">
             <strong>Option 2: Prefer an email copy?</strong>
-            <p>We'll send the presentation link to the email address you confirmed earlier. Change it below only if you'd like the link sent somewhere else.</p>
+            <p>Enter the email address where you'd like us to send the presentation link.</p>
 
             <div class="field">
               <label for="zoomEmail">Email for the link</label>
@@ -389,18 +350,12 @@ h3{margin:0 0 7px}
         <p class="muted small center">*The additional $100 Rewards Voucher is subject to the applicable wide-screen participation requirements and offer terms. It is separate from the selected Travel Certificate.</p>
       </div>
 
-      <!-- Shown outside the live window -->
-      <div id="reserveOptions" class="hidden center">
-        <h2>We're Not Live Right Now</h2>
-        <p id="reserveMessage">The live viewing window is currently closed. You can reserve a spot for an upcoming presentation instead.</p>
-
-        <div class="promise">
-          <strong>Reserve your spot for the next presentation.</strong>
-          <p>Choose a suitable upcoming session and return during the live viewing window to watch.</p>
-        </div>
-
-        <a class="btn gold" href="https://aloha-hawaii-tours.github.io/spot-reservation/">RESERVE MY SPOT →</a>
-        <p class="muted small">The Reserve Spot option is available while live watching is closed.</p>
+      <!-- Reservation is available at all times, whether live access is open or closed. -->
+      <div id="reserveOptions" class="device" style="margin-top:20px;text-align:center">
+        <span class="symbol" aria-hidden="true">📅</span>
+        <h2>Not available at the moment?</h2>
+        <p class="muted">No worries! You can reserve your spot for an upcoming presentation below. Choose a suitable session and return during its live viewing window to watch.</p>
+        <a class="btn gold" href="https://calendly.com/go_travel" target="_blank" rel="noopener">RESERVE MY SPOT →</a>
       </div>
 
       <button class="btn outline" onclick="go(2)">← BACK</button>
@@ -416,24 +371,9 @@ h3{margin:0 0 7px}
 </div>
 
 <script>
-/*
- * Existing Google Apps Script Web App endpoint retained.
- *
- * The deployed Apps Script must support:
- *   action=submitGift
- *   action=sendZoomDetails
- *
- * For gift confirmation, the Apps Script should email the configured
- * notification address with the submitted gift and visitor email.
- */
 const EMAIL_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzEbULhvoX5mwSl-EH9qw0cKj_Y8LxzBgROJm1ulyhmAEPD8oI5qWGbBp5OzGTAbjNMw/exec";
 const PRESENTATION_URL = "https://live.travelaht.com/aht";
-const RESERVATION_URL = "https://aloha-hawaii-tours.github.io/spot-reservation/";
 
-let selectedGift = "";
-let selectedEmail = "";
-let giftSaved = false;
-let savingGift = false;
 let zoomRequestSent = false;
 
 function go(n){
@@ -446,10 +386,7 @@ function go(n){
 
   window.scrollTo({top:0,behavior:"smooth"});
 
-  if(n===3){
-    document.getElementById("zoomEmail").value=selectedEmail;
-    updateLiveWindow();
-  }
+  if(n===3) updateLiveWindow();
 }
 
 async function postToScript(data){
@@ -459,7 +396,6 @@ async function postToScript(data){
   }
 
   /*
-   * Kept compatible with the existing Apps Script deployment.
    * no-cors does not expose the server response, so it cannot verify
    * that the server processed the request or delivered an email.
    */
@@ -472,75 +408,6 @@ async function postToScript(data){
     body:new URLSearchParams(data).toString()
   });
 }
-
-/* Gift selection and email confirmation */
-document.getElementById("giftForm").addEventListener("submit",async function(event){
-  event.preventDefault();
-
-  if(savingGift)return;
-
-  const giftSelect=document.getElementById("giftSelect");
-  const emailInput=document.getElementById("giftEmail");
-  const status=document.getElementById("giftStatus");
-  const btn=document.getElementById("submitGift");
-
-  if(!giftSelect.value){
-    giftSelect.reportValidity();
-    return;
-  }
-
-  if(!emailInput.value.trim() || !emailInput.checkValidity()){
-    emailInput.reportValidity();
-    return;
-  }
-
-  selectedGift=giftSelect.value;
-  selectedEmail=emailInput.value.trim();
-
-  if(giftSaved){
-    go(2);
-    return;
-  }
-
-  savingGift=true;
-  btn.disabled=true;
-  btn.textContent="SUBMITTING…";
-  status.textContent="Submitting your gift selection…";
-
-  try{
-    await postToScript({
-      action:"submitGift",
-      gift:selectedGift,
-      name:"",
-      certificateName:selectedGift,
-      mobile:"",
-      mobileNumber:"",
-      email:selectedEmail,
-      recipientEmail:selectedEmail,
-      page:"AHT Exclusive Travel Certificate"
-    });
-
-    /*
-     * Because no-cors hides the response, this means the request was
-     * submitted by the browser, not that notification delivery was verified.
-     */
-    giftSaved=true;
-
-    document.getElementById("chosenGift").textContent=selectedGift;
-    document.getElementById("confirmedEmail").textContent=selectedEmail;
-    document.getElementById("zoomEmail").value=selectedEmail;
-
-    status.textContent="";
-    go(2);
-
-  }catch(err){
-    status.textContent="We couldn't submit your selection. Please check your connection and try again.";
-  }finally{
-    savingGift=false;
-    btn.disabled=false;
-    btn.textContent="CONFIRM GIFT & CONTINUE →";
-  }
-});
 
 /*
  * Eastern Time viewing window:
@@ -565,23 +432,17 @@ function isLiveWindowOpen(){
 function updateLiveWindow(){
   const live=isLiveWindowOpen();
   const liveOptions=document.getElementById("liveOptions");
-  const reserveOptions=document.getElementById("reserveOptions");
   const status=document.getElementById("liveStatus");
 
   liveOptions.classList.toggle("hidden",!live);
-  reserveOptions.classList.toggle("hidden",live);
 
   if(live){
     status.className="live-status live";
     status.textContent="LIVE ACCESS IS AVAILABLE — You can start watching now.";
   }else{
     status.className="live-status off";
-    status.textContent="LIVE ACCESS IS CURRENTLY CLOSED";
-
     document.getElementById("wideScreenBox").classList.add("hidden");
-
-    document.getElementById("reserveMessage").textContent=
-      "The viewing window is open daily from 1:45 PM through 8:44 PM Eastern Time. It's currently outside that window, so please reserve a spot for an upcoming presentation.";
+    status.textContent="LIVE ACCESS IS CURRENTLY CLOSED — No worries, you can reserve a spot for an upcoming presentation below.";
   }
 }
 
@@ -589,7 +450,7 @@ function updateLiveWindow(){
 setInterval(updateLiveWindow,15000);
 
 document.addEventListener("visibilitychange",()=>{
-  if(!document.hidden)updateLiveWindow();
+  if(!document.hidden) updateLiveWindow();
 });
 
 function showWideScreen(){
@@ -632,15 +493,12 @@ async function sendZoomDetails(){
     await postToScript({
       action:"sendZoomDetails",
       email:input.value.trim(),
-      gift:selectedGift,
       source:"AHT Exclusive Travel Certificate",
       presentationUrl:PRESENTATION_URL
     });
 
     zoomRequestSent=true;
-
     status.textContent="Your email request has been submitted. Please check your inbox and spam folder. You can also open the presentation directly above.";
-
   }catch(err){
     status.textContent="We couldn't submit the email request. Please try again while live access is available.";
   }finally{
